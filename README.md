@@ -1,24 +1,24 @@
 # Mixed Reality Toolkit for Unity on Apple Vision Pro
 
-> ### Fork Notes:
-> *By: Griffin Hurt &lt;griffhurt@pitt.edu&gt;*
->
-> I patched the input system for MRTK so that hand tracking works with the Apple Vision Pro. This really only involved editing the `UnityHandsSubsystem` to estimate the position of the palm. Technical details are below.
-> ### How to Create a Project:
-> 1. Make a copy of the `UnityProjects/ProjectBase` folder and rename it to your project's name.
-> 2. Start Unity Hub, click "Add" in the top right corner, then click "Add project from disk"
-> 3. Select the folder you just created (the copy of `ProjectBase`)
-> 4. Open the project by clicking its name in Unity Hub
->
-> The "Main" scene contains the basic setup for an MR scene including necessary camera changes and an `ARSession`.
-> 
-> **Note:** *"Play To Device" unfortunately does not work with this implementation, as the project must be compiled with Metal to support the MRTK shaders. To test, build the Unity project and then deploy with Xcode.*
-> ### Technical Details
-> When I first tried to get MRTK to run on the AVP, I figured interaction would just work out of the box because of the `UnityHandsSubsystem`, which uses the `XR Hands` package (supported by AVP). Unfortunately, `UnityHandsSubsystem` requires all the hand joints to be present, and the AVP does not provide the "palm" joint. To remedy this, I added code that estimates the position of the palm using the vectors from the "middle metacarpal" to the "ring proximal", "middle proximal", and "index proximal". It seems to work well enough for UI interactions and object manipulators.
->
-> The other change I had to make was fixing the `CameraSettingsManager` on the `Main Camera`. Opaque display headsets (like the AVP) default to having their backgrounds replaced with a skybox in MRTK. I changed that to be a solid color of `rgba(0, 0, 0, 0)` so MR works correctly on the AVP.
-> ### Future Direction
-> Ideally I would like to add `SpatialPointer` support in the future so that interactions more consistent with other AVP apps can be implemented. [Another repo](https://github.com/jelmer3000/MixedRealityToolkit-Unity-PolySpatial/tree/wip-polyspatial-visionOS-support) has done something similar. Eventually, I'd like to submit this as a PR to the MRTK repository, but the code is far too experimental for that at this point.
+## Fork Notes:
+*By: Griffin Hurt &lt;griffhurt@pitt.edu&gt;*
+
+I patched the input system for MRTK so that hand tracking works with the Apple Vision Pro. This really only involved editing the `UnityHandsSubsystem` to estimate the position of the palm. Technical details are below.
+### How to Create a Project:
+1. Make a copy of the `UnityProjects/ProjectBase` folder and rename it to your project's name.
+2. Start Unity Hub, click "Add" in the top right corner, then click "Add project from disk"
+3. Select the folder you just created (the copy of `ProjectBase`)
+4. Open the project by clicking its name in Unity Hub
+
+The "Main" scene contains the basic setup for an MR scene including necessary camera changes and an `ARSession`.
+
+**Note:** *"Play To Device" unfortunately does not work with this implementation, as the project must be compiled with Metal to support the MRTK shaders. To test, build the Unity project and then deploy with Xcode.*
+### Technical Details
+When I first tried to get MRTK to run on the AVP, I figured interaction would just work out of the box because of the `UnityHandsSubsystem`, which uses the `XR Hands` package (supported by AVP). Unfortunately, `UnityHandsSubsystem` requires all the hand joints to be present, and the AVP does not provide the "palm" joint. To remedy this, I added code that estimates the position of the palm using the vectors from the "middle metacarpal" to the "ring proximal", "middle proximal", and "index proximal". It seems to work well enough for UI interactions and object manipulators.
+
+The other change I had to make was fixing the `CameraSettingsManager` on the `Main Camera`. Opaque display headsets (like the AVP) default to having their backgrounds replaced with a skybox in MRTK. I changed that to be a solid color of `rgba(0, 0, 0, 0)` so MR works correctly on the AVP.
+### Future Direction
+Ideally I would like to add `SpatialPointer` support in the future so that interactions more consistent with other AVP apps can be implemented. [Another repo](https://github.com/jelmer3000/MixedRealityToolkit-Unity-PolySpatial/tree/wip-polyspatial-visionOS-support) has done something similar. Eventually, I'd like to submit this as a PR to the MRTK repository, but the code is far too experimental for that at this point.
 
 ![Mixed Reality Toolkit](./Images/MRTK_Unity_header.png)
 
