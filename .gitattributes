@@ -2,10 +2,10 @@
 .gitattributes text
 *.txt text
 *.md text
-
 *.asset eol=lf
 *.controller eol=lf
 *.prefab eol=lf
 *.meta eol=lf
 *.mat eol=lf
 *.anim eol=lf
+ExternalDependencies/com.microsoft.spatialaudio.spatializer.unity-2.0.55.tgz filter=lfs diff=lfs merge=lfs -text
