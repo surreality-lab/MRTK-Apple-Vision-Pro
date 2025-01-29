@@ -88,3 +88,7 @@ crashlytics-build.properties
 */[Aa]ssets/TextMesh Pro*
 *.pfx
 *.pfx.meta
+
+# Don't include user projects besides ProjectBase
+*/
+!ProjectBase
